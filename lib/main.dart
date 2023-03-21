@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toonflix/widgets/button.dart';
 
 void main() {
   // https://dribbble.com/shots/19858341-Finnancial-Mobile-IOS-App
@@ -72,43 +73,16 @@ class MyApp extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(45),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 20,
-                        horizontal: 50,
-                      ),
-                      child: Text(
-                        'Transfer',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
+                children: const [
+                  Button(
+                    text: "Transfer",
+                    bgColor: Colors.amber,
+                    textColor: Colors.black,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 31, 33, 35),
-                      borderRadius: BorderRadius.circular(45),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 20,
-                        horizontal: 50,
-                      ),
-                      child: Text(
-                        'Request',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                  Button(
+                    text: "Request",
+                    bgColor: Color.fromARGB(255, 31, 33, 35),
+                    textColor: Colors.white,
                   )
                 ],
               ),
