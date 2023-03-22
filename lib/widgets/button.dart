@@ -14,15 +14,17 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double width = screenSize.width;
     return Container(
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(45),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           vertical: 20,
-          horizontal: 50,
+          horizontal: width * 0.08,
         ),
         child: Text(
           text,
