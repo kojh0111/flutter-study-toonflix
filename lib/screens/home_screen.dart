@@ -10,7 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const twentyFiveMinutes = 1500;
+  // static const twentyFiveMinutes = 1500;
+  static const twentyFiveMinutes = 3;
   int totalSeconds = twentyFiveMinutes;
   bool isRunning = false;
   int totalPomodoros = 0;
@@ -49,6 +50,21 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void onRestartPressed() {
+    setState(() {
+      isRunning = false;
+      totalSeconds = twentyFiveMinutes;
+    });
+    timer.cancel();
+  }
+
+  void onPomodorosRestartPressed() {
+    onRestartPressed();
+    setState(() {
+      totalPomodoros = 0;
+    });
+  }
+
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
     return duration.toString().substring(2, 7);
@@ -61,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           Flexible(
-            flex: 1,
+            flex: 2,
             child: Container(
               alignment: Alignment.bottomCenter,
               child: Text(
@@ -75,8 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Flexible(
-            flex: 3,
-            child: Center(
+            flex: 2,
+            child: Align(
+              alignment: Alignment.bottomCenter,
               child: IconButton(
                 iconSize: 120,
                 color: Theme.of(context).cardColor,
@@ -88,7 +105,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Flexible(
-            flex: 1,
+            flex: 2,
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: IconButton(
+                iconSize: 80,
+                color: Theme.of(context).cardColor,
+                onPressed: onRestartPressed,
+                icon: const Icon(Icons.restore_outlined),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 2,
             child: Row(
               children: [
                 Expanded(
@@ -97,25 +126,44 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          'Pomodoros',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).textTheme.headline1!.color,
-                          ),
+                        const SizedBox(
+                          width: 76,
                         ),
-                        Text(
-                          '$totalPomodoros',
-                          style: TextStyle(
-                            fontSize: 58,
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).textTheme.headline1!.color,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Pomodoros',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .color,
+                              ),
+                            ),
+                            Text(
+                              '$totalPomodoros',
+                              style: TextStyle(
+                                fontSize: 58,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .headline1!
+                                    .color,
+                              ),
+                            ),
+                          ],
                         ),
+                        IconButton(
+                            iconSize: 60,
+                            color: Theme.of(context).textTheme.headline1!.color,
+                            onPressed: onPomodorosRestartPressed,
+                            icon: const Icon(Icons.refresh_outlined)),
                       ],
                     ),
                   ),
